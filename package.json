@@ -1,0 +1,28 @@
+{
+  "name": "jotter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [
+    "graphql",
+    "apollo",
+    "apollo-server"
+  ],
+  "author": {
+    "name": "Raghvendra Singh"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.10.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "mongoose": "^6.4.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
