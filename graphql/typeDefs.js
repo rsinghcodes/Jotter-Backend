@@ -8,12 +8,16 @@ module.exports = gql`
   }
   type User {
     id: ID!
-    fullname: String!
+    name: String!
     email: String!
     createdAt: String!
   }
+  type successInfo {
+    message: String
+    success: Boolean
+  }
   input UserInput {
-    fullname: String!
+    name: String!
     email: String!
     password: String!
     confirmPassword: String!
@@ -22,11 +26,14 @@ module.exports = gql`
     details: String!
   }
   type Query {
-    pastebin: [PasteBin]
     getUsers: [User]
+    getUserById(userId: ID!): User
+    pastebin: [PasteBin]
+    getPasteBinById(pasteBinId: ID!): PasteBin
   }
   type Mutation {
     registerUser(registerInput: UserInput): User!
     createPastebin(pastebinInput: PasteBinInput): PasteBin
+    googleAuth(idToken: String!): User!
   }
 `;
