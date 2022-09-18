@@ -30,11 +30,14 @@ module.exports = {
       // Make sure user doesnt already exist
       const user = await User.findOne({ email });
       if (user) {
-        throw new UserInputError('Email is already taken', {
-          errors: {
-            email: 'Account is already created using this email!',
-          },
-        });
+        throw new UserInputError(
+          'An account is already created using this email!',
+          {
+            errors: {
+              message: 'An account is already created using this email!',
+            },
+          }
+        );
       }
       // hash password and create an auth token
       password = await bcrypt.hash(password, 12);
@@ -64,29 +67,26 @@ module.exports = {
       if (payload.email_verified) {
         const user = await User.findOne({ email: payload.email });
 
-        if (!user) {
-          const newUser = new User({
-            name: payload.name,
-            email: payload.email,
-            provider: payload.iss,
-            providerId: payload.sub,
-            createdAt: new Date().toISOString(),
-          });
+        if (!!user) return user;
 
-          const res = await newUser.save();
+        const newUser = new User({
+          name: payload.name,
+          email: payload.email,
+          provider: payload.iss,
+          providerId: payload.sub,
+          createdAt: new Date().toISOString(),
+        });
 
-          return {
-            ...res._doc,
-            id: res._id,
-          };
-        } else {
-          const user = await User.findOne({ email: payload.email });
-          return user;
-        }
+        const res = await newUser.save();
+
+        return {
+          ...res._doc,
+          id: res._id,
+        };
       } else {
         throw new AuthenticationError('Login unsuccessfull!', {
           errors: {
-            email: 'Login unsuccessfull!',
+            message: 'Login unsuccessfull!',
           },
         });
       }

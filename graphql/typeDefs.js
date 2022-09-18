@@ -20,7 +20,6 @@ module.exports = gql`
     name: String!
     email: String!
     password: String!
-    confirmPassword: String!
   }
   input PasteBinInput {
     details: String!
