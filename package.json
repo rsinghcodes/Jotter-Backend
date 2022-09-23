@@ -22,6 +22,7 @@
     "dotenv": "^16.0.1",
     "google-auth-library": "^8.4.0",
     "graphql": "^16.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.6"
   },
   "devDependencies": {

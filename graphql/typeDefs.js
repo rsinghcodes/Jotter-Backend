@@ -11,6 +11,7 @@ module.exports = gql`
     name: String!
     email: String!
     createdAt: String!
+    token: String!
   }
   type successInfo {
     message: String
@@ -32,6 +33,7 @@ module.exports = gql`
   }
   type Mutation {
     registerUser(registerInput: UserInput): User!
+    loginUser(email: String!, password: String!): User!
     createPastebin(pastebinInput: PasteBinInput): PasteBin
     googleAuth(idToken: String!): User!
   }
